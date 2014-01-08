@@ -1,16 +1,16 @@
 class AuthorsController < ApplicationController
   before_action :set_author, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index,:show]
 
   # GET /authors
   # GET /authors.json
   def index
     @authors = Author.all
+	@q = Author.search(params[:q])
   end
 
   # GET /authors/1
   # GET /authors/1.json
-  def show
-  end
 
   # GET /authors/new
   def new

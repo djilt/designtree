@@ -1,7 +1,14 @@
 Library::Application.routes.draw do
-  resources :books
+  resources :categories
 
+  resources :reservations
+
+  get "home/index"
+  devise_for :users
+  resources :entries, only: [:index, :new, :create]
+  resources :books
   resources :authors
+  root "entries#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

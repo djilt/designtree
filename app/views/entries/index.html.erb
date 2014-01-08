@@ -1,0 +1,19 @@
+<%- model_class = Entry -%>
+<div class="page-header">
+  <h1>Księga gości</h1>
+</div>
+
+
+    <% @entries.each do |entry| %>
+      <div class="row">
+        <strong><%= entry.name %></strong><span>, </span><%= distance_of_time_in_words(Time.now - entry.created_at) %> <span>temu</span>
+	  </div>
+	  <div class="row">
+        <%= entry.comment %>
+      </div>
+    <% end %>
+<div class="row">
+	<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_entry_path,
+            :class => 'btn btn-info' %>
+</div>
