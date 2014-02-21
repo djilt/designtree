@@ -1,3 +1,4 @@
+# encoding: utf-8
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   before_action :set_authors, only: [:new, :edit, :update, :create]
@@ -11,7 +12,7 @@ class BooksController < ApplicationController
   def index  
 	@books = Book.all
 	@q = Book.search(params[:q])
-
+  @books2 = @q.result(distinct: true)
   end
 
   # GET /books/1
@@ -35,7 +36,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to @book, notice: 'Book was successfully created.' }
+        format.html { redirect_to @book, notice: 'Książka tak bardzo utworzona.' }
         format.json { render action: 'show', status: :created, location: @book }
       else
         format.html { render action: 'new' }
@@ -49,7 +50,7 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
+        format.html { redirect_to @book, notice: 'Zaszła edycja.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -76,7 +77,7 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :author_id, :category_id)
+      params.require(:book).permit(:title, :author_id, {:category_ids => [] })
     end
     
     def set_authors

@@ -8,8 +8,11 @@
   <dd><%= @author.first_name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:last_name) %>:</strong></dt>
   <dd><%= @author.last_name %></dd>
+  <dt><strong>Książki:</strong></dt>
+  <% @author.books.each do |book| %>
+		<dd><p><%= link_to book.title, book %> </p></dd>
+  <% end %>
 </dl>
-
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               authors_path, :class => 'btn'  %>

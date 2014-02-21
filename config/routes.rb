@@ -1,8 +1,6 @@
 Library::Application.routes.draw do
   resources :categories
-
   resources :reservations
-
   get "home/index"
   devise_for :users
   resources :entries, only: [:index, :new, :create]

@@ -1,3 +1,4 @@
+# encoding: utf-8
 class AuthorsController < ApplicationController
   before_action :set_author, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index,:show]
@@ -28,7 +29,7 @@ class AuthorsController < ApplicationController
 
     respond_to do |format|
       if @author.save
-        format.html { redirect_to @author, notice: 'Author was successfully created.' }
+        format.html { redirect_to @author, notice: 'Autor został utworzony' }
         format.json { render action: 'show', status: :created, location: @author }
       else
         format.html { render action: 'new' }
@@ -42,7 +43,7 @@ class AuthorsController < ApplicationController
   def update
     respond_to do |format|
       if @author.update(author_params)
-        format.html { redirect_to @author, notice: 'Author was successfully updated.' }
+        format.html { redirect_to @author, notice: 'Autor został edytowany' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

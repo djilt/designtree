@@ -1,36 +1,52 @@
 <%- model_class = Book -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
 </div>
-<div>
-<%= search_form_for @q, :html => {:class => "form-search"} do |f| %>
-  <%= f.label :author_first_name_cont, "Imię" %>
-  <%= f.text_field :author_first_name_cont %>
-  <%= f.label :author_last_name_cont, "Nazwisko" %>
-  <%= f.text_field :author_last_name_cont %>    
-  <%= f.submit %>
+<%= search_form_for @q, :html => {:class => "form-inline"} do |f| %>
+    <div class="form-group">
+      <%= f.label :title_cont, "Tytuł", class: 'sr-only' %>
+      <%= f.text_field :title_cont, class: 'form-control', placeholder: 'Tytuł' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :author_first_name_or_author_last_name_cont, "Autor", class: 'sr-only' %>
+      <%= f.text_field :author_first_name_or_author_last_name_cont, class: 'form-control', placeholder: 'Autor' %>
+    </div>
+    <%= f.submit 'Wyszukaj pozycję', class: 'btn btn-info' %>
 <% end %>
-</div>
+
+
+
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:title) %></th>
-      <th><%= model_class.human_attribute_name(:author_id) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%= model_class.human_attribute_name(:category) %></th>
+
+      <th><%=sort_link(@q, model_class.human_attribute_name(:title) ) %></th>
+      <th><%=sort_link(@q, model_class.human_attribute_name(:author_id)) %></th>
+      <th><%=sort_link(@q, model_class.human_attribute_name(:created_at)) %></th>
+      <th><%=sort_link(@q, model_class.human_attribute_name(:category)) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
-    <% @books.each do |book| %>
+    <% @books2.each do |book| %>
       <tr>
-        <td><%= link_to book.id, book_path(book) %></td>
+
         <td><%= book.title %></td>
-        <td><%= book.author_full_name %></td>
+        <td><%= link_to book.author_full_name, author_path(book.author) %></td>
         <td><%=l book.created_at %></td>
-        <td><%= book.category %></td>
+
         <td>
+			<% if book.categories.count>0 %>
+				<% book.categories.each do |cat| %>
+					<%= link_to cat.name, cat %>
+				<%end%>
+			<%end%>
+		<%#= book.categories.map{|c| c.name }.join(", ")  %></td>
+
+
+        <td>
+          <%= link_to t('.show', :default => t("helpers.links.show")),
+                      book_path(book), :class => 'btn btn-mini' %>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_book_path(book), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -44,6 +60,7 @@
   </tbody>
 </table>
 
+
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_book_path,
-            :class => 'btn btn-primary' %>
+            :class => 'btn btn-info' %>

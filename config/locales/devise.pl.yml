@@ -79,5 +79,26 @@ pl:
       over_x_years:
         one: 'ponad rok'
         other: "%{count} lat"
-
-
+        
+  books:
+    index:
+      title: 'Książki'
+      author: 'Autor'
+      created_at: 'Utworzony'
+      new: 'Nowa'
+      show: 'Pokaż'
+      edit: 'Edytuj'
+      destroy: 'Usuń'
+    show:
+      title: 'Tytuł'
+      author: "Autor"
+      created_at: 'Utworzony'
+  authors:
+    index:
+      title: 'Książki'
+      new: "Nowy"
+      show: "Pokaż"
+      edit: "Edytuj"
+      destroy: "Usuń"
+    show:
+      title: "Autorzy"

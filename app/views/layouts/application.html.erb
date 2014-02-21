@@ -40,44 +40,43 @@
         <header> 
             <div class="container">
             <div class="navbar navbar-inverse navbar-fixed-top">
-            <a href="index.html" class="navbar-brand">Ibhuku</a> 
+            <%= link_to "Ibhuku", :root, :class => "navbar-brand" %></a> 
             <button class = "navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
             	<span class = "icon-bar"></span>
            		<span class = "icon-bar"></span>
             	<span class = "icon-bar"></span>
             </button>
-            <nav class="collapse collapse navbar-collapse navHeaderCollapse "> 
-				
-                   <ul class="nav navbar-nav navbar-right"> 
-				   <li >   <%= link_to t('.books', :default => t("helpers.links.books")),
+            <nav class="collapse collapse navbar-collapse navHeaderCollapse "> 	
+				<ul class="nav navbar-nav navbar-right"> 
+					<li >   <%= link_to t('.books', :default => t("helpers.links.books")),
               books_path, :class => ' '  %></li>
-				<li >   <%= link_to t('.authors', :default => t("helpers.links.authors")),
+					<li >   <%= link_to t('.authors', :default => t("helpers.links.authors")),
               authors_path, :class => ' '  %></li>
-			  <li >   <%= link_to t('.entries', :default => t("helpers.links.entries")),
+					<li >   <%= link_to t('.entries', :default => t("helpers.links.entries")),
               entries_path, :class => ' '  %></li>
-                    <li class="dropdown">
-					 <% if user_signed_in? %> 
-        			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Zalogowany jako: <%= current_user.email %> <b class="caret"></b></a>
-        			<ul class="dropdown-menu">
-                      <li>
-						<%= link_to "logout", destroy_user_session_path, method: :delete %>
-						</li>
-					</ul>
+					<li >   <%= link_to t('.categories', :default => t("helpers.links.categories")),
+              categories_path, :class => ' '  %></li>
+					<li class="dropdown">
+						<% if user_signed_in? %> 
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Zalogowany jako: <%= current_user.email %> <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li>
+										<%= link_to "logout", destroy_user_session_path, method: :delete %>
+									</li>
+								</ul>
 						<% else %>
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Nie jesteś zalogowany<b class="caret"></b></a>
-					<ul class="dropdown-menu">
-                      <li>
-						<%= link_to "login", new_user_session_path %>
-						<% end %>
-						
-       				</ul> 
-                    </li>
-                   </ul>
-                                   
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Nie jesteś zalogowany<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li>
+									<%= link_to "login", new_user_session_path %>
+						<% end %>		
+							</ul> 
+					</li>
+				</ul>                       
             </nav> 
-            </div>
-            <div class="row"></div>  
-            </div>
+          </div>
+          <div class="row"></div>  
+        </div>
         </header>
         <!--End Header--> 
         <!--Data-->
@@ -91,11 +90,6 @@
                 </div>
 			</div> 
 		</div> 
-
-      <footer>
-        <p>&copy; Company 2013</p>
-      </footer>
-
     </div> <!-- /container -->
 
   </body>
